@@ -302,6 +302,12 @@ log4j.appender.R.layout.ConversionPattern=%d{ISO8601} %c{1} [%t] %p - %m%n
   String log4jVersion
 
   /**
+   * The slf4j version to use for the plugin
+   *
+   * @parameter expression="${codenarc.slf4j.version}" default-value="1.7.25"
+   */
+  String slf4jVersion
+  /**
    * The Groovy version to use for the plugin
    *
    * @parameter expression="${codenarc.groovy.version}" default-value="1.7.5"
@@ -321,11 +327,14 @@ log4j.appender.R.layout.ConversionPattern=%d{ISO8601} %c{1} [%t] %p - %m%n
   protected void executeReport( Locale locale ) {
     log.debug( "codeNarcVersion ==> ${codeNarcVersion}" )
     log.debug( "log4jVersion ==> ${log4jVersion}" )
+    log.debug( "slf4jVersion ==> ${slf4jVersion}" )
     log.debug( "groovyVersion ==> ${groovyVersion}" )
 
     def items = [
             [groupId: 'org.codenarc', artifactId: 'CodeNarc', version: codeNarcVersion],
             [groupId: 'log4j', artifactId: 'log4j', version: log4jVersion],
+            [groupId: 'org.slf4j', artifactId: 'slf4j-api', version: slf4jVersion],
+            [groupId: 'org.slf4j', artifactId: 'slf4j-log4j12', version: slf4jVersion],
             [groupId: 'org.codehaus.groovy', artifactId: 'groovy-all', version: groovyVersion]
     ]
 
